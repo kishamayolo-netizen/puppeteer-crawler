@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+// Use PORT from environment (set by Leapcell to 8080 by default), fall back to 3000 for local dev
+const PORT = process.env.PORT || 8080;
 
 // Make sure Express knows it's behind a proxy (platform TLS termination)
 app.set('trust proxy', true);
