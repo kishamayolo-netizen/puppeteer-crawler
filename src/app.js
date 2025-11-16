@@ -162,4 +162,11 @@ app.post('/generate', async (req, res) => {
 
 // Explicitly bind to 0.0.0.0 and log binding info so the platform can route TLS -> HTTP correctly
 const HOST = process.env.HOST || '0.0.0.0';
+// Extra startup info to help diagnose platform routing issues
+console.log('Starting server with env:', {
+  PORT: process.env.PORT || PORT,
+  NODE_ENV: process.env.NODE_ENV,
+  HOST: HOST,
+  PID: process.pid
+});
 app.listen(PORT, HOST, () => console.log(`Server listening on ${HOST}:${PORT}`));
