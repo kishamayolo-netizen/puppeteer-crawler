@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ImgnAI Generator</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 2rem;}
+    input, select, button {margin: 0.5rem 0; padding: 0.5rem; font-size: 1rem;}
+    #results img {max-width: 300px; margin: 0.5rem; display: inline-block;}
+  </style>
+</head>
+<body>
+  <h1>ImgnAI Image Generator</h1>
+  <form id="genForm">
+    <input type="text" id="prompt" placeholder="Prompt…" required style="width:100%;"><br>
+    <select id="model"><option value="1">Gen</option></select>
+    <select id="quality"><option value="1">Fast</option><option value="2">High Quality</option></select>
+    <select id="ratio"><option value="1">5:2 (1024×409)</option></select><br>
+    <button type="submit">Generate 4 Images</button>
+  </form>
+
+  <div id="results"></div>
+
+  <script>
+    document.getElementById('genForm').onsubmit = async e => {
+      e.preventDefault();
+      const data = {
+        prompt: document.getElementById('prompt').value,
+        model: +document.getElementById('model').value,
+        quality: +document.getElementById('quality').value,
+        ratio: +document.getElementById('ratio').value
+      };
+      const res = await fetch('/generate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      const out = document.getElementById('results');
+      out.innerHTML = '';
+      if (json.success) {
+        json.images.forEach(url => {
+          const img = document.createElement('img');
+          img.src = url;
+          out.appendChild(img);
+        });
+      } else {
+        out.innerHTML = `<p style="color:red;">${json.error}</p>`;
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "imgnai-generator",
+  "version": "1.0.0",
+  "description": "ImgnAI image generator using Puppeteer",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "puppeteer": "^22.0.0",
+    "ejs": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
