@@ -49,10 +49,9 @@ app.post('/generate', async (req, res) => {
   let browser, page;
 
   try {
-    // Launch Puppeteer (use system Chromium — no download script needed)
+    // Launch Puppeteer (let it auto-discover the installed browser)
     browser = await puppeteer.launch({
       headless: 'new',
-      executablePath: '/usr/bin/chromium-browser',  // Leapcell's pre-installed
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
