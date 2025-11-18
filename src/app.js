@@ -53,6 +53,7 @@ app.post('/generate', async (req, res) => {
     browser = await puppeteer.launch({
       headless: 'new',
       executablePath: process.env.CHROME_PATH || './google-chrome-stable',
+      timeout: 60000, // Increase timeout to 60 seconds for slower platforms
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
