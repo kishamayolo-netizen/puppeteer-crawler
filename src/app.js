@@ -49,9 +49,10 @@ app.post('/generate', async (req, res) => {
   let browser, page;
 
   try {
-    // Launch Puppeteer (let it auto-discover the installed browser)
+    // Launch Puppeteer using the system browser installed by prepare_puppeteer_env.sh
     browser = await puppeteer.launch({
       headless: 'new',
+      executablePath: process.env.CHROME_PATH || './google-chrome-stable',
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
